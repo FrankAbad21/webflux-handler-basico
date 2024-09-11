@@ -33,7 +33,6 @@ public class ProductService {
 
     public Mono<Product> save(ProductDto productDto) {
         Mono<Boolean> existsName = productRepository.findByName(productDto.getName()).hasElement();
-        //return productRepository.save(product);
         return existsName.flatMap(exist -> exist ? Mono.error(
                 new CustomException(HttpStatus.BAD_REQUEST, NAME_MESSAGE)) :
                 productRepository.save(
