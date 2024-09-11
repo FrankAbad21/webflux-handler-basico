@@ -20,12 +20,14 @@ public class ProductService {
     }
 
     public Mono<Product> getById(int id) {
+        //return productRepository.findById(id);
         return productRepository.findById(id)
                 .switchIfEmpty(Mono.error(new Exception("Product no encontrado")));
     }
 
     public Mono<Product> save(Product product) {
         Mono<Boolean> existsName = productRepository.findByName(product.getName()).hasElement();
+        //return productRepository.save(product);
         return existsName.flatMap(exist -> exist ? Mono.error(new Exception("El nombre del producto ya existe")) :
                 productRepository.save(product));
     }
