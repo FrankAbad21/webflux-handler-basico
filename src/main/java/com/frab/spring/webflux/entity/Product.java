@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class Product {
 
     @Id
